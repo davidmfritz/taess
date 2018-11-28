@@ -23,9 +23,9 @@ Sie wurden erfolgreich ausgeloggt!<br>
 </td></tr></table>
 <?php
 } else {
-    if ($_SESSION['pw'] == "!acp_Delete91") {
+    include "connect.php";
+    if ($_SESSION['pw'] == $acp_password) {
         echo "<h2 style='margin-bottom:10px;'>Guestbook AdminControlPanel <font color=#00ff00 size=2>(Eingeloggt)</font> <font size=2><a href=?p=gb_acp&logout=true>Ausloggen</a></font></h2>";
-        include "connect.php";
         $sql = "SELECT * FROM posts ORDER BY PostID DESC;";
         $ergebnis = mysql_query($sql) or die("Die Anfrage konnte nicht ausgef&uuml;hrt werden");
         $num = mysql_num_rows($ergebnis);
