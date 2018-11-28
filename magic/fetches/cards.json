@@ -1,0 +1,53 @@
+{
+    "fetchlands": [{
+            "name": "Flooded Strand",
+            "fetchable-colors": ["W", "U"],
+            "weight": 0
+        },
+        {
+            "name": "Marsh Flats",
+            "fetchable-colors": ["W", "B"],
+            "weight": 0
+        },
+        {
+            "name": "Arid Mesa",
+            "fetchable-colors": ["W", "R"],
+            "weight": 0
+        },
+        {
+            "name": "Windswept Heath",
+            "fetchable-colors": ["W", "G"],
+            "weight": 0
+        },
+        {
+            "name": "Polluted Delta",
+            "fetchable-colors": ["U", "B"],
+            "weight": 0
+        },
+        {
+            "name": "Scalding Tarn",
+            "fetchable-colors": ["U", "R"],
+            "weight": 0
+        },
+        {
+            "name": "Misty Rainforest",
+            "fetchable-colors": ["U", "G"],
+            "weight": 0
+        },
+        {
+            "name": "Bloodstained Mire",
+            "fetchable-colors": ["B", "R"],
+            "weight": 0
+        },
+        {
+            "name": "Verdant Catacombs",
+            "fetchable-colors": ["B", "G"],
+            "weight": 0
+        },
+        {
+            "name": "Wooded Foothills",
+            "fetchable-colors": ["R", "G"],
+            "weight": 0
+        }
+    ]
+}
