@@ -1,0 +1,203 @@
+.poke-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.poke-elem {
+    display: grid;
+    grid-template: "poke-id poke-current-level""poke-received-in poke-received-in""poke-received-by poke-received-by""poke-ot-name poke-ot-id""poke-current-location poke-current-location""poke-note poke-note";
+    background-color: #ddd;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+
+.poke-elem:nth-child(odd) {
+    background-color: #eee;
+    border-bottom: 1px solid #ddd;
+}
+
+.poke-id {
+    grid-area: poke-id;
+}
+
+.poke-current-level {
+    grid-area: poke-current-level;
+    text-align: right;
+}
+
+.poke-received-in {
+    grid-area: poke-received-in;
+}
+
+.poke-received-by {
+    grid-area: poke-received-by;
+}
+
+.poke-ot-name {
+    grid-area: poke-ot-name;
+}
+
+.poke-ot-id {
+    grid-area: poke-ot-id;
+}
+
+.poke-current-location {
+    grid-area: poke-current-location;
+}
+
+.poke-note {
+    grid-area: poke-note;
+}
+
+.poke-version {
+    padding: 2px;
+}
+
+.poke-version-first {
+    border-radius: 5px 0 0 5px;
+}
+
+.poke-version-last {
+    border-radius: 0 5px 5px 0;
+}
+
+.poke-version-solo {
+    border-radius: 5px;
+}
+
+.poke-version-red {
+    background-color: #FF4444;
+}
+
+.poke-version-blue {
+    background-color: #6792FF;
+}
+
+.poke-version-yellow {
+    background-color: #FFFF00
+}
+
+.poke-version-gold {
+    background-color: #E3C641;
+}
+
+.poke-version-silver {
+    background-color: #C1CCD3;
+}
+
+.poke-version-crystal {
+    background-color: #87CEFA;
+}
+
+.poke-version-ruby {
+    color: white;
+    background-color: #BF0109;
+}
+
+.poke-version-sapphire {
+    color: white;
+    background-color: #3862AE;
+}
+
+.poke-version-emerald {
+    color: white;
+    background-color: #009A46;
+}
+
+.poke-version-firered {
+    background-color: #DD7521;
+}
+
+.poke-version-leafgreen {
+    background-color: #B9D101;
+}
+
+.poke-version-diamond {
+    background-color: #84BAF8;
+}
+
+.poke-version-pearl {
+    background-color: #DDAAAA;
+}
+
+.poke-version-platinum {
+    background-color: #AABBD1;
+}
+
+.poke-version-heartgold {
+    background-color: #EEDD82;
+}
+
+.poke-version-soulsilver {
+    background-color: #B9D3EE;
+}
+
+.poke-version-black {
+    color: black;
+    background-color: white;
+}
+
+.poke-version-white {
+    color: white;
+    background-color: black;
+    border-color: black;
+}
+
+.poke-version-black2 {
+    color: #0084C9;
+    background-color: black;
+}
+
+.poke-version-white2 {
+    color: #ED1C24;
+    background-color: white;
+    border-color: #ED1C24;
+}
+
+.poke-version-x {
+    color: #005E9B;
+    background-color: #DFF3F4;
+    border-color: #005E9B;
+}
+
+.poke-version-y {
+    color: #871223;
+    background-color: #E9B2BF;
+    border-color: #871223;
+}
+
+.poke-version-omegaruby {
+    color: #F8F688;
+    background-color: #BF0109;
+    border-color: #4F1734;
+}
+
+.poke-version-alphasapphire {
+    color: #F8F688;
+    background-color: #3862AE;
+    border-color: #0A1535;
+}
+
+.poke-version-sun {
+    color: #6F2637;
+    background-color: #F2952D;
+    border-color: #2D1515;
+}
+
+.poke-version-moon {
+    color: #2D2D5F;
+    background-color: #56A4D2;
+    border-color: #1F1B2A;
+}
+
+.poke-version-ultrasun {
+    color: #FBA81C;
+    background-color: #110B0D;
+    border-color: #FA8E00;
+}
+
+.poke-version-ultramoon {
+    color: #12A6DF;
+    background-color: #110B0D;
+    border-color: #008CD9;
+}

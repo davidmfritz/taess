@@ -11,16 +11,21 @@ function DeleteCheck($id){
 </script>
 <?php
 if ($_GET['logout'] == "true") {
-    session_destroy();?>
+    session_destroy();
+    ?>
 <meta http-equiv='refresh' content='3, ./?p=gb'>
 <h2 style="margin-bottom:10px;">Guestbook AdminControlPanel</h2>
-<table align="center" rules="none" border="0"><tr><td>
-<br><br><br><br><br>
-<div class="post" style="width:260px !important; text-align: center;">
-Sie wurden erfolgreich ausgeloggt!<br>
-<a href="./?p=gb">Zur&uuml;ck zum G&auml;stebuch</a>
-</div>
-</td></tr></table>
+<table align="center" rules="none" border="0">
+    <tr>
+        <td>
+            <br><br><br><br><br>
+            <div class="post" style="width:260px !important; text-align: center;">
+                Sie wurden erfolgreich ausgeloggt!<br>
+                <a href="./?p=gb">Zur&uuml;ck zum G&auml;stebuch</a>
+            </div>
+        </td>
+    </tr>
+</table>
 <?php
 } else {
     include "connect.php";
@@ -42,13 +47,13 @@ Sie wurden erfolgreich ausgeloggt!<br>
         mysql_close();
     } else {
         ?>
-</h2>
-<form action="?p=gb_acp" method="post">
-	<input type="password" id="pw" name="pw">&nbsp;Passwort<br>
-	<input type="submit" name="acplogin" value="Admin-ControlPanel betreten">
-</form>
+	</h2>
+	<form action="?p=gb_acp" method="post">
+		<input type="password" id="pw" name="pw">&nbsp;Passwort<br>
+		<input type="submit" name="acplogin" value="Admin-ControlPanel betreten">
+	</form>
 
-<?php
+	<?php
 }
 }
 ?>

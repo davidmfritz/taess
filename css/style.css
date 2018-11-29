@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background-color: #444;
+    /* background-image: url("../img/background2.png"); */
+}
+
+#container {
+    display: grid;
+    grid-template-columns: auto 980px auto;
+}
+
+#container>div {
+    grid-column: 2 / -2;
+    padding: 20px;
+}
+
+input,
+textarea,
+fieldset {
+    padding: 4px;
+}
+
+button,
+input[type=submit],
+input[type=reset] {
+    margin: 20px;
+    padding: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+input[type=submit] {
+    background-color: #E32636;
+    color: white;
+    border: none;
+    transition: 0.3s;
+}
+
+input[type=reset] {
+    background-color: #D4D4D4;
+    border: none;
+    transition: 0.3s;
+}
+
+/* Highlight = +16 auf jedem rgb Wert */
+
+input[type=submit]:hover {
+    background-color: #F33646;
+}
+
+input[type=reset]:hover {
+    background-color: #E4E4E4;
+}
+
+fieldset {
+    padding: 10px;
+}
+
+h1,
+h2,
+h3 {
+    margin: 10px 0;
+}
+
+ul,
+ol {
+    margin-left: 40px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+@media (max-width: 1000px) {
+    #container {
+        grid-template-columns: auto 1fr auto;
+    }
+
+    #container>div {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    div.post {
+        padding: 10px;
+    }
+}
+
+::selection {
+    background: #ffb7b7;
+    /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+    background: #ffb7b7;
+    /* Gecko Browsers */
+}
+
+/* ******** HEADER START ******** */
+
+div#top {
+    grid-column: 1 / -1;
+    text-align: center;
+    background: linear-gradient(to bottom, black, #222);
+}
+
+#top>img {
+    padding: 40px 0;
+    max-width: 100%;
+}
+
+/* ******** HEADER END ******** */
+
+/* ******** NAVIGATION START ******** */
+
+div#navi {
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
+#navi li.hover,
+#navi li:hover {
+    position: relative;
+    cursor: default;
+}
+
+#navi ul ul {
+    position: absolute;
+    z-index: 598;
+}
+
+#navi ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navi li {
+    width: 9em;
+    float: left;
+}
+
+#navi li.dir>ul {
+    overflow: hidden;
+    max-height: 0;
+}
+
+#navi li.dir:hover>ul {
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    height: auto;
+    max-height: 600px;
+}
+
+#navi li.dir>ul>li {
+    margin: 0;
+    clear: both;
+}
+
+#navi a {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    padding: 1em 0;
+    transition: 0.3s;
+}
+
+#navi li.dir>a,
+#navi li.dir:hover>a {
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+#navi li.dir>a {
+    background-image: url(../img/nav-arrow-down-white.png);
+}
+
+#navi li.dir:hover>a {
+    background-image: url(../img/nav-arrow-down.png);
+}
+
+#navi a:link,
+#navi a:visited {
+    color: #ffffff;
+    background-color: #E32636;
+    text-decoration: none;
+}
+
+#navi a:active,
+#navi a:hover {
+    color: #000000;
+    background: #ffffff;
+    text-decoration: none;
+}
+
+/* ******** NAVIGATION END ******** */
+
+/* ******** CONTENT START ******** */
+
+#content {
+    background: linear-gradient(to bottom, white, #eee);
+}
+
+#content a,
+#content a:link,
+#content a:visited {
+    color: #E32636;
+    text-decoration: none;
+}
+
+#content a:hover {
+    border-bottom: 2px dotted black;
+}
+
+h1.title {
+    font-size: 200%;
+    margin-bottom: 40px;
+    font-family: 'PT Sans', sans-serif;
+}
+
+/* **** Homepage Site Start **** */
+
+.post>h2 {
+    border-bottom: 2px solid black;
+    margin-bottom: 1em;
+}
+
+.post {
+    margin-bottom: 2em;
+    padding: 1em;
+}
+
+/* **** Homepage Site End **** */
+
+/* **** Imprint Site Start **** */
+
+#expander:hover {
+    cursor: pointer;
+}
+
+.expandable {
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+    height: auto;
+    max-height: 600px;
+    margin: 20px;
+}
+
+.expandable.collapsed {
+    max-height: 0;
+}
+
+/* **** Imprint Site End **** */
+
+/* ******** CONTENT END ******** */
+
+/* ******** SCROLL BUTTON START ******** */
+
+#scroll-top {
+    background-color: #E32636;
+    color: white;
+    text-align: center;
+    transition: 0.3s;
+}
+
+#scroll-top:hover {
+    cursor: pointer;
+    background-color: #F33646;
+}
+
+/* ******** SCROLL BUTTON END ******** */
+
+/* ******** FOOTER START ******** */
+
+div#footer {
+    padding-bottom: 50px;
+}
+
+#footer,
+#footer a {
+    background-color: black;
+    color: white;
+}
+
+#footer p {
+    margin-bottom: 10px;
+}
+
+#footer p,
+#footer p a {
+    font-size: 90%;
+}
+
+/* ******** FOOTER END ******** */

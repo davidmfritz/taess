@@ -5,17 +5,17 @@
 	const GEN_1_UNBREEDABLE = new Array(132, 144, 145, 146, 150, 151);
 	const GEN_2_UNBREEDABLE = new Array(201, 243, 244, 245, 249, 250, 251);
 	const GEN_3_UNBREEDABLE = new Array(377, 378, 379, 380, 381, 382, 383, 384,
-										385, 386);
+		385, 386);
 	const GEN_4_UNBREEDABLE = new Array(480, 481, 482, 483, 484, 485, 486, 487,
-										488, 491, 492, 493);
+		488, 491, 492, 493);
 	const GEN_5_UNBREEDABLE = new Array(494, 638, 639, 640, 641, 642, 643, 644,
-										645, 646, 647, 648, 649);
+		645, 646, 647, 648, 649);
 	const GEN_6_UNBREEDABLE = new Array(716, 717, 718, 719, 720, 721);
 	const GEN_7_UNBREEDABLE = new Array(772, 773, 785, 786, 787, 788, 789, 790,
-										791, 792, 793, 794, 795, 796, 797, 798,
-										799, 800, 801, 802, 803, 804, 805, 806,
-										807);
-	
+		791, 792, 793, 794, 795, 796, 797, 798,
+		799, 800, 801, 802, 803, 804, 805, 806,
+		807);
+
 	const GEN_1_MAX = 151;
 	const GEN_2_MAX = 251;
 	const GEN_3_MAX = 386;
@@ -24,15 +24,22 @@
 	const GEN_6_MAX = 721;
 	const GEN_7_MAX = 807;
 
-	const PATH_REGULAR_SPRITE	= "https://www.serebii.net/sunmoon/pokemon/";
-	const PATH_SHINY_SPRITE		= "https://www.serebii.net/Shiny/SM/";
-	const EXTENSION_SPRITE		= ".png";
-	
-	function randomNow(gen = 7) {	
-		
+	const NEWEST_GEN = 7;
+
+	const PATH_REGULAR_SPRITE = "https://www.serebii.net/sunmoon/pokemon/";
+	const PATH_SHINY_SPRITE = "https://www.serebii.net/Shiny/SM/";
+	const EXTENSION_SPRITE = ".png";
+
+	function randomNow(gen = NEWEST_GEN) {
+
+		if (isNaN(gen) || gen <= 0 || gen > NEWEST_GEN) {
+			e = new Error(`Illegal Argument: Must be a number between 1 and ${NEWEST_GEN}`);
+			return e;
+		}
+
 		let x, output, max, unbreedable;
 		unbreedable = new Array();
-		
+
 		//Check which Generation to randomize and set corresponding variables
 		switch (gen) {
 			default:
@@ -73,24 +80,29 @@
 				}
 				break;
 		}
-		
+
 		//Generate random number inside range until breedable Pokémon
 		do {
 			x = Math.round(Math.random() * max);
-		} while (x <= 0 ||
-				 unbreedable.find(function(val){return val == this}, x) > 0)
-		
+		} while (
+			x <= 0 ||
+			unbreedable.find(function (val) {
+				return val == this;
+			}, x) > 0
+		)
+
 		//Convert variables to strings for comparison
 		x = x.toString();
 		max = max.toString();
-		
+
 		//Append zeros to match the maximum length
 		for (let i = x.length; i < max.length; i++) {
 			x = "0" + x;
 		}
-		
+
 		//Render output
-		output = `
+		output =
+			`
 		<table>
 			<tr>
 				<td>
@@ -110,15 +122,15 @@
 				target='_blank'>auf&nbsp;Serebii.net</a></td>
 			</tr>
 		</table>`;
-		
+
 		//Cast ouput to DOM
 		document.getElementById("result").innerHTML = output;
 	}
 
 	//Listener for key codes
-	window.onkeyup = function(e) {
+	window.onkeyup = function (e) {
 		let key = e.keyCode ? e.keyCode : e.which;
-		
+
 		if (key == 48 || key == 96 || key == 13 || key == 32) {
 			//0, num0, (num)Enter, Space
 			randomNow();
@@ -140,20 +152,23 @@
 	}
 </script>
 
-<a href="?p=sprites">Zur&uuml;ck</a> ::
-<a href="#" onClick="javascript:randomNow(7);">Random Gen 7</a> ::
-<a href="#" onClick="javascript:randomNow(6);">Random Gen 6</a> ::
-<a href="#" onClick="javascript:randomNow(5);">Random Gen 5</a> ::
-<a href="#" onClick="javascript:randomNow(4);">Random Gen 4</a> ::
-<a href="#" onClick="javascript:randomNow(3);">Random Gen 3</a> ::
-<a href="#" onClick="javascript:randomNow(2);">Random Gen 2</a> ::
-<a href="#" onClick="javascript:randomNow(1);">Random Gen 1</a>
+<a href="?p=sprites">Zur&uuml;ck</a>
+:: <a href="#" onClick="javascript:randomNow(7);">Random Gen 7</a>
+:: <a href="#" onClick="javascript:randomNow(6);">Random Gen 6</a>
+:: <a href="#" onClick="javascript:randomNow(5);">Random Gen 5</a>
+:: <a href="#" onClick="javascript:randomNow(4);">Random Gen 4</a>
+:: <a href="#" onClick="javascript:randomNow(3);">Random Gen 3</a>
+:: <a href="#" onClick="javascript:randomNow(2);">Random Gen 2</a>
+:: <a href="#" onClick="javascript:randomNow(1);">Random Gen 1</a>
 
 <div id="result">&nbsp;</div>
 
-<p>Nummerntaste drücken, um die entsprechende Generation zu Randomizen.<br/>
-	(0/Enter/Space = neueste Generation)</p>
+<p>
+	Nummerntaste drücken, um die entsprechende Generation zu Randomizen.<br />
+	(0/Enter/Space = neueste Generation)
+</p>
 
 <script language="javascript" type="text/javascript">
+	//Run the Randomizer on page load
 	randomNow();
 </script>

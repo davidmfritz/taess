@@ -1,13 +1,13 @@
-//////////////////////////////////////////////////////////////////////////////// 
-// Author: BloodyScythe
-// Version: 3
-// 
-// Changelog:
-// V3: Dropdown for easy selection of color combinations added
-// V2: Added copy button to quickly get the found fetchlands to your clipboard
-// V1: Implementation of selecting colors, assigning weight to corresponding
-//     fetchlands, sorting them by weight and printing them to screen
-////////////////////////////////////////////////////////////////////////////////
+/*
+ * Author: BloodyScythe
+ * Version: 3
+ * 
+ * Changelog:
+ * V3: Dropdown for easy selection of color combinations added
+ * V2: Added copy button to quickly get the found fetchlands to your clipboard
+ * V1: Implementation of selecting colors, assigning weight to corresponding
+ *     fetchlands, sorting them by weight and printing them to screen
+ */
 
 
 window.addEventListener("load", () => {
