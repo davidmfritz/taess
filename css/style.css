@@ -301,4 +301,19 @@ div#footer {
     font-size: 90%;
 }
 
+.social-icons {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.social-icons img {
+    max-width: 48px;
+    max-height: 48px;
+    margin: 10px;
+}
+
+img.inverted {
+    filter: invert(100%);
+}
+
 /* ******** FOOTER END ******** */
