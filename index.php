@@ -146,10 +146,10 @@ switch (@$_GET['p']) {
 
 			<div id="footer">
 				<div class="social-icons">
-					<a href="https://steamcommunity.com/id/bloodyscythe/" target="_blank"><img src="img/steam-logo-icon.svg" class="inverted" alt="Link to my Steam Profile" /></a>
+					<a href="https://steamcommunity.com/id/bloodyscythe/" target="_blank"><img src="img/steam-logo-icon.svg" alt="Link to my Steam Profile" /></a>
 					<a href="https://twitter.com/Scythic" target="_blank"><img src="img/twitter-logo-icon.svg" alt="Link to my Twitter Profile" /></a>
-					<a href="https://deckstats.net/decks/17957/f36476" target="_blank"><img src="img/deckstats-logo-icon.svg" class="inverted" alt="Link to my Deckstats Profile" /></a>
-					<a href="?p=imprint"><img src="img/email-icon.svg" class="inverted" alt="E-Mail me a message" /></a>
+					<a href="https://deckstats.net/decks/17957/f36476" target="_blank"><img src="img/deckstats-logo-icon.svg" alt="Link to my Deckstats Profile" /></a>
+					<a href="?p=imprint"><img src="img/email-icon.svg" alt="E-Mail me a message" /></a>
 				</div>
 
 				<?php if (@$_GET['p'] == 'gb') {

@@ -312,8 +312,4 @@ div#footer {
     margin: 10px;
 }
 
-img.inverted {
-    filter: invert(100%);
-}
-
 /* ******** FOOTER END ******** */
