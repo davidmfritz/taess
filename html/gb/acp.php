@@ -1,16 +1,16 @@
 <?php
-if ($_POST['pw'] != "") {
-    $_SESSION['pw'] = $_POST['pw'];
+if (!isset($_POST['pw'])) {
+    $_SESSION['pw'] = @$_POST['pw'];
 }
 ?>
 <script language="javascript">
 function DeleteCheck($id){
-	var chk = window.confirm("Wollen Sie den Eintrag #"+$id+" wirklich l�schen?");
+	var chk = window.confirm("Wollen Sie den Eintrag #"+$id+" wirklich löschen?");
 	return chk;
 }
 </script>
 <?php
-if ($_GET['logout'] == "true") {
+if (@$_GET['logout'] == "true") {
     session_destroy();
     ?>
 <meta http-equiv='refresh' content='3, ./?p=gb'>
@@ -49,8 +49,8 @@ if ($_GET['logout'] == "true") {
         ?>
 	</h2>
 	<form action="?p=gb_acp" method="post">
-		<input type="password" id="pw" name="pw">&nbsp;Passwort<br>
-		<input type="submit" name="acplogin" value="Admin-ControlPanel betreten">
+		<input type="password" id="pw" name="pw" placeholder="Passwort" /><br>
+		<input type="submit" name="acplogin" value="Admin-ControlPanel betreten" />
 	</form>
 
 	<?php
