@@ -10,7 +10,7 @@ if (@$_GET['p'] == 'gb_acp') {
 	<title>BloodyScythe.taess.com / BloodyScythe.taess.net</title>
 	<link type="text/css" rel="stylesheet" href="css/styles.css"/>
 </head>
-<body <?php if (@$_GET['p'] == ('gb')) {echo "onLoad='javascript:document.getElementById(\'name\').focus();'";}?>	<?php if (@$_GET['p'] == ('gb_acp')) {echo "onLoad='javascript:document.getElementById(\'pw\').focus();'";}?>>
+<body <?php if (@$_GET['p'] == ('gb')) {echo "onLoad='javascript:document.getElementById(\"name\").focus();'";}?>	<?php if (@$_GET['p'] == ('gb_acp')) {echo "onLoad='javascript:document.getElementById(\'pw\').focus();'";}?>>
 <div id="container">
 
 <div id="top">

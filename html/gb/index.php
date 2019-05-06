@@ -1,40 +1,60 @@
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LeU8qEUAAAAAEeuLGoaIJWW0PwFgtna21Cd4J9T"></script>
 <script type="text/javascript">
+
+//Create a token for each user visiting the site
+grecaptcha.ready(function() {
+	grecaptcha.execute('6LeU8qEUAAAAAEeuLGoaIJWW0PwFgtna21Cd4J9T', {action: 'gbentry'}).then(function(token) {
+		document.querySelector("#g-recaptcha-response").value = token;
+	});
+});
+
 function ResetCheck() {
   var chk = window.confirm("Wollen Sie wirklich alle Eingaben löschen?");
   return (chk);
 }
+
 function CheckInput() {
-	if (document.getElementById("name").value == "") {
+	const name = document.querySelector("#name");
+	const msg = document.querySelector("#msg");
+
+	if (name.value == "") {
 		alert("Bitte einen Namen angeben!");
-		document.getElementById("name").focus();
+		name.focus();
 		return false;
 	}
-	if (document.getElementById("msg").value == "") {
+	if (msg.value == "") {
 		alert("Es gibt keine Nachricht zum Übermitteln!");
-		document.getElementById("msg").focus();
+		msg.focus();
 		return false;
 	}
-	if(document.forms[0].getElementById("msg").value.length>1000){
+	if(msg.value.length>1000){
 		alert("Ihre eingegebene Nachricht ist zu lang. Bitte kürzen Sie diese auf maximal 1000 Zeichen. Danke.");
 		return false;
 	}
 	return true;
 }
+
 function charLength() {
-	var $length=1000-document.getElementById("msg").value.length;
-	document.getElementById("chars_left").value=$length;
-	if(document.getElementById("chars_left").value<0){
-		document.getElementById("chars_left").style.color = "#f00";
-		document.getElementById("chars_left").style.fontWeight = "bold";
+	const msg = document.querySelector("#msg");
+	const chars_left = document.querySelector("#chars_left");
+
+	const $length = 1000 - msg.value.length;
+	chars_left.value = $length;
+	if(chars_left.value < 0){
+		chars_left.style.color = "#f00";
+		chars_left.style.fontWeight = "bold";
 	}else{
-		document.getElementById("chars_left").style.color = "#444444";
-		document.getElementById("chars_left").style.fontWeight = "normal";
+		chars_left.style.color = "#444444";
+		chars_left.style.fontWeight = "normal";
 	}
 	return true;
 }
 </script>
+
 <form name="eintag_erstellen" value="eintrag_erstellen" action="?p=gb" method="post" onreset="return ResetCheck();" onsubmit="return CheckInput();">
+
+	<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+
 	<fieldset><legend>G&auml;stebucheintrag erstellen</legend>
 		<table id="gb_entry">
 			<tr>
@@ -63,11 +83,6 @@ function charLength() {
 			</tr>
 			<tr>
 				<td>
-					<div class="g-recaptcha" data-sitekey="6Lfp8c4SAAAAADYOGgSf3IADqL_e-i2302UIB9XH"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>
 					<input name="send" type="submit" value="abschicken">&nbsp;&nbsp;&nbsp;&nbsp;<input name="reset" type="reset" value="zur&uuml;cksetzen">
 				</td>
 			</tr>
@@ -78,40 +93,32 @@ function charLength() {
 include "connect.php";
 
 // Wird nur ausgeführt, wenn das Formular abgesendet wurde, das Feld "name" und "msg" nicht leer sind
-if (@$_POST['send'] != "" && @$_POST['name'] != "" && @$_POST['msg'] != "") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name']) && isset($_POST['msg']) && isset($_POST['g-recaptcha-response'])) {
 
     function post_captcha($user_response, $secret)
     {
-        $fields_string = '';
-        $fields = array(
-            'secret' => $secret,
-            // 'secret' => '6Lfp8c4SAAAAABd3xVNHYoTx2dzZh0GkJ3GH5E7W ',
-            'response' => $user_response,
-        );
-        foreach ($fields as $key => $value) {
-            $fields_string .= $key . '=' . $value . '&';
+        // Build POST request:
+        $recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
+
+        // Make and decode POST request:
+        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $secret . '&response=' . $user_response);
+        $recaptcha = json_decode($recaptcha);
+
+        // Take action based on the score returned:
+        if (@$recaptcha->score >= 0.5) {
+            // Verified
+            return true;
         }
-
-        $fields_string = rtrim($fields_string, '&');
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
-        curl_setopt($ch, CURLOPT_POST, count($fields));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return json_decode($result, true);
+        // Not verified - error
+        return false;
     }
 
     // Call the function post_captcha
     $res = post_captcha($_POST['g-recaptcha-response'], $captcha_secret);
 
-    if (!$res['success']) {
+    if (!$res) {
         // What happens when the CAPTCHA wasn't checked
-        echo "<p>Please <a href='javascript:history.back();'>go back</a> and make sure you check the security CAPTCHA box.</p><br/>";
+        echo "<p>CAPTCHA verification failed. Please <a href='javascript:history.back();'>go back</a> and try again.</p><br/>";
     } else {
         // If CAPTCHA is successfully completed...
         // Eintragen des Gästebucheintrags in die Datenbank
