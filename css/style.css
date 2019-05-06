@@ -314,6 +314,13 @@ div#footer {
     max-width: 48px;
     max-height: 48px;
     margin: 10px;
+    filter: opacity(60%);
+    transition: 0.5s;
+}
+
+.social-icons img:hover {
+    filter: opacity(100%);
+    transition: 0.3s;
 }
 
 /* ******** FOOTER END ******** */
