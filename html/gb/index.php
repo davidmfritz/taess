@@ -1,5 +1,13 @@
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LeU8qEUAAAAAEeuLGoaIJWW0PwFgtna21Cd4J9T"></script>
 <script type="text/javascript">
+
+//Create a token for each user visiting the site
+grecaptcha.ready(function() {
+	grecaptcha.execute('6LeU8qEUAAAAAEeuLGoaIJWW0PwFgtna21Cd4J9T', {action: 'gbentry'}).then(function(token) {
+		document.querySelector("#g-recaptcha-response").value = token;
+	});
+});
+
 function ResetCheck() {
   let chk = window.confirm("Wollen Sie wirklich alle Eingaben löschen?");
   return (chk);
@@ -27,23 +35,28 @@ function CheckInput() {
 }
 
 function charLength() {
-	let $length = 1000 - document.querySelector("#msg").value.length;
-	const charsLeft = document.querySelector("#chars_left");
-	charsLeft.value = $length;
+	const msg = document.querySelector("#msg");
+	const chars_left = document.querySelector("#chars_left");
 
-	if(charsLeft.value < 0) {
-		charsLeft.style.color = "#f00";
-		charsLeft.style.fontWeight = "bold";
+	const $length = 1000 - msg.value.length;
+	chars_left.value = $length;
+	if (chars_left.value < 0) {
+		chars_left.style.color = "#f00";
+		chars_left.style.fontWeight = "bold";
 	} else {
-		charsLeft.style.color = "#444444";
-		charsLeft.style.fontWeight = "normal";
+		chars_left.style.color = "#444444";
+		chars_left.style.fontWeight = "normal";
 	}
 	return true;
 }
 </script>
+
 <!--  ******** INPUT FORM START ******** -->
 <form name="eintag_erstellen" value="eintrag_erstellen" action="?p=gb" method="post" onreset="return ResetCheck();" onsubmit="return CheckInput();">
-	<fieldset><legend>G&auml;stebucheintrag erstellen</legend>
+
+    <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
+
+    <fieldset><legend>G&auml;stebucheintrag erstellen</legend>
 		<table id="gb_entry">
 			<tr>
 				<td>Name: *</td>
@@ -71,11 +84,6 @@ function charLength() {
 			</tr>
 			<tr>
 				<td>
-					<div class="g-recaptcha" data-sitekey="6Lfp8c4SAAAAADYOGgSf3IADqL_e-i2302UIB9XH"></div>
-				</td>
-			</tr>
-			<tr>
-				<td>
 					<input name="send" type="submit" value="Abschicken"><input name="reset" type="reset" value="Zur&uuml;cksetzen">
 				</td>
 			</tr>
@@ -83,44 +91,38 @@ function charLength() {
 	</fieldset>
 </form>
 <!-- ******** INPUT FORM END ******** -->
+
 <?php
 /* ******** WRITE POST INTO DB START ******** */
 include "connect.php";
 
 // Wird nur ausgeführt, wenn das Formular abgesendet wurde, das Feld "name" und "msg" nicht leer sind
-if (@$_POST['send'] != "" && @$_POST['name'] != "" && @$_POST['msg'] != "") {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name']) && isset($_POST['msg']) && isset($_POST['g-recaptcha-response'])) {
 
     function post_captcha($user_response, $secret)
     {
-        $fields_string = '';
-        $fields = array(
-            'secret' => $secret,
-            'response' => $user_response,
-        );
-        foreach ($fields as $key => $value) {
-            $fields_string .= $key . '=' . $value . '&';
+        // Build POST request:
+        $recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
+
+        // Make and decode POST request:
+        $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $secret . '&response=' . $user_response);
+        $recaptcha = json_decode($recaptcha);
+
+        // Take action based on the score returned:
+        if (@$recaptcha->score >= 0.5) {
+            // Verified
+            return true;
         }
-
-        $fields_string = rtrim($fields_string, '&');
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
-        curl_setopt($ch, CURLOPT_POST, count($fields));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return json_decode($result, true);
+        // Not verified - error
+        return false;
     }
 
     // Call the function post_captcha
     $res = post_captcha($_POST['g-recaptcha-response'], $captcha_secret);
 
-    if (!$res['success']) {
+    if (!$res) {
         // What happens when the CAPTCHA wasn't checked
-        echo "<p>Please <a href='javascript:history.back();'>go back</a> and make sure you check the security CAPTCHA box.</p><br/>";
+        echo "<p>CAPTCHA verification failed. Please <a href='javascript:history.back();'>go back</a> and try again.</p><br/>";
     } else {
         // If CAPTCHA is successfully completed...
         // Eintragen des Gästebucheintrags in die Datenbank
