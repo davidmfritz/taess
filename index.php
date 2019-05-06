@@ -169,7 +169,6 @@ switch (@$_GET['p']) {
 }?>
 				<p>
 				    Copyright by BloodyScythe &copy; 2007-2018. Alle Rechte vorbehalten. All Rights reserved.<br/>
-				    Optimale Darstellung mit/Optimal viewing in <a href="http://www.mozilla.com/firefox" target="_blank">Firefox</a>, 1024x768+.
 				</p>
 			</div>
 		</div>
