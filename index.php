@@ -40,14 +40,7 @@ echo $body;
                             <li><a href="?p=shinies">Shinies</a></li>
                         </ul>
                     </li>
-                    <li class="dir"><a href="#">Interessen</a>
-                        <ul>
-                            <li><a href="?p=magic">Magic (MTG)</a></li>
-                            <li><a href="?p=games">Spiele</a></li>
-                            <li><a href="?p=wc3">DotA</a></li>
-                            <li><a href="?p=gebote">Elf Gebote</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="?p=games">Spiele</a></li>
                     <li><a href="?p=bio">&Uuml;ber mich</a></li>
                     <li class="dir"><a href="#">Kontakt</a>
                         <ul>
@@ -116,25 +109,9 @@ switch (@$_GET['p']) {
         echo "\n\t\t\t\t<h1 class=\"title\">Shinies</h1>";
         include "html/shinies.html";
         break;
-    case "wc3":
-        echo "\n\t\t\t\t<h1 class=\"title\">DotA - Defense of the Ancients</h1>";
-        include "html/wc3.html";
-        break;
     case "games":
         echo "\n\t\t\t\t<h1 class=\"title\">Spiele</h1>";
         include "html/games.html";
-        break;
-    case "magic":
-        echo "\n\t\t\t\t<h1 class=\"title\">Magic: the Gathering</h1>";
-        include "html/mtg.html";
-        break;
-    case "gebote":
-    case "666":
-        echo "\n\t\t\t\t<h1 class=\"title\">Elf Gebote</h1>";
-        include "html/gebote.html";
-        break;
-    case "1337":
-        echo "Wenn du 1337 suchst, bist du auf dieser Seite falsch! :P";
         break;
 }
 ?>
@@ -146,10 +123,10 @@ switch (@$_GET['p']) {
 
 			<div id="footer">
 				<div class="social-icons">
-					<a href="https://steamcommunity.com/id/bloodyscythe/" target="_blank"><img src="img/steam-logo-icon.svg" alt="Link to my Steam Profile" /></a>
-					<a href="https://twitter.com/Scythic" target="_blank"><img src="img/twitter-logo-icon.svg" alt="Link to my Twitter Profile" /></a>
-					<a href="https://deckstats.net/decks/17957/f36476" target="_blank"><img src="img/deckstats-logo-icon.svg" alt="Link to my Deckstats Profile" /></a>
-					<a href="?p=imprint"><img src="img/email-icon.svg" alt="E-Mail me a message" /></a>
+					<a href="https://steamcommunity.com/id/bloodyscythe/" title="Link to my Steam Profile" target="_blank"><img src="img/steam-logo-icon.svg" alt="Steam" /></a>
+					<a href="https://twitter.com/Scythic" title="Link to my Twitter Profile" target="_blank"><img src="img/twitter-logo-icon.svg" alt="Twitter" /></a>
+					<a href="https://deckstats.net/decks/17957/f36476" title="Link to my Deckstats Profile" target="_blank"><img src="img/deckstats-logo-icon.svg" alt="Deckstats" /></a>
+					<a href="?p=imprint" title="E-Mail me a message"><img src="img/email-icon.svg" alt="E-Mail" /></a>
 				</div>
 
 				<?php if (@$_GET['p'] == 'gb') {
@@ -168,7 +145,7 @@ switch (@$_GET['p']) {
     echo "\n\t\t\t\t</p>";
 }?>
 				<p>
-				    Copyright by BloodyScythe &copy; 2007-2018. Alle Rechte vorbehalten. All Rights reserved.<br/>
+				    Copyright by BloodyScythe &copy; 2007-2019. Alle Rechte vorbehalten. All Rights reserved.<br/>
 				</p>
 			</div>
 		</div>
