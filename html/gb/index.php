@@ -56,38 +56,22 @@ function charLength() {
 
     <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />
 
-    <fieldset><legend>G&auml;stebucheintrag erstellen</legend>
-		<table id="gb_entry">
-			<tr>
-				<td>Name: *</td>
-				<td>E-mail Adresse:</td>
-				<td>Homepage:</td>
-				<td style="text-align: center;"><a href="?p=gb_acp" style="color:#888888; text-decoration:none;">AdminCP</a></td>
-			</tr>
-			<tr>
-				<td><input id="name" name="name" type="text" value=""></td>
-				<td><input id="mail" name="mail" type="text" value=""></td>
-				<td><input id="hp" name="hp" type="text" value=""></td>
-				<td><a class="ggb" href="http://www.graphicguestbook.com/bloodyscythe" target="_blank">GraphicGuestbook</a></td>
-			</tr>
-		</table>
-		<table id="gb_entry">
-			<tr>
-				<td>Nachricht: *</td>
-			</tr>
-			<tr>
-				<td>
-					<textarea id="msg" name="msg" rows="8" cols="60" onKeyUp="charLength(this.value)"></textarea><br>
-					Zeichen &uuml;brig: <input id="chars_left" style="color:#444444; border:0; background-color:#d0d0d0; font-weight:none;" type="text" size="3" readonly="readonly" value="1000"><br>
-					<small>* Felder m&uuml;ssen ausgef&uuml;llt sein, um fortzufahren</small>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input name="send" type="submit" value="Abschicken"><input name="reset" type="reset" value="Zur&uuml;cksetzen">
-				</td>
-			</tr>
-		</table>
+    <fieldset>
+        <legend>G&auml;stebucheintrag erstellen</legend>
+
+        <input id="name" name="name" type="text" value="" placeholder="Name *" /><br />
+        <input id="mail" name="mail" type="text" value="" placeholder="E-Mail Adresse" /><br />
+        <input id="hp" name="hp" type="text" value="" placeholder="Website" /><br />
+
+        <textarea id="msg" name="msg" rows="8" cols="60" onKeyUp="charLength(this.value)" placeholder="Nachricht *"></textarea><br />
+        Zeichen &uuml;brig: <input id="chars_left" style="color:#444444; border:0; background-color:#d0d0d0; font-weight:none;" type="text" size="3" readonly="readonly" value="1000"><br />
+
+        <small>* Felder m&uuml;ssen ausgef&uuml;llt sein, um fortzufahren</small><br />
+
+        <input name="send" type="submit" value="Abschicken"><input name="reset" type="reset" value="Zur&uuml;cksetzen"><br />
+
+        <a href="?p=gb_acp" style="color:#888888; text-decoration:none;">AdminCP</a>
+        <a class="ggb" href="http://www.graphicguestbook.com/bloodyscythe" target="_blank">GraphicGuestbook</a>
 	</fieldset>
 </form>
 <!-- ******** INPUT FORM END ******** -->
@@ -144,6 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name']) && isset($_PO
 /* ******** DISPLAY ALL POSTS START ******** */
 if ($con->connect_errno) {
     echo "Connect error: " . $con->connect_errno;
+    echo "<br />Bitte versuchen Sie, die Seite neu zu laden. Falls dieser Fehler weiterhin besteht, <a href='?p=imprint'>nehmen Sie Kontakt auf</a>.";
 } else {
     $sql = "SELECT * FROM posts ORDER BY PostID DESC;";
     $result = $con->query($sql);
